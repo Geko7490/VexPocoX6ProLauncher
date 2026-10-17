@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--
+        Yalnızca gerçekten gerekli izinler istenir.
+        SET_WALLPAPER: "normal" seviye izin, çalışma zamanı onayı gerektirmez.
+        QUERY_ALL_PACKAGES, root, accessibility gibi izinler BİLEREK kullanılmaz.
+    -->
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
+
+    <!--
+        Android 11+ paket görünürlüğü: yalnızca ana ekran/uygulama çekmecesi rolüyle
+        eşleşen uygulamalar görünür olur. Bu sayede tüm uygulama listesi
+        "sorgulanabilir" olur ve QUERY_ALL_PACKAGES iznine gerek kalmaz.
+    -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.APP_DRAWER" />
+        </intent>
+    </queries>
+
+    <application
+        android:name=".VexApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.VexLauncher"
+        tools:targetApi="33">
+
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|density|fontScale"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:stateNotNeeded="true"
+            android:theme="@style/Theme.VexLauncher"
+            android:windowSoftInputMode="adjustResize">
+
+            <!-- Uygulama simgesi olarak da görünür -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+                <!-- Varsayılan ana ekran rolü (ACTION_MAIN + CATEGORY_HOME) -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+                <!-- Sistem "uygulama çekmecesi" düğmesi -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.APP_DRAWER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>

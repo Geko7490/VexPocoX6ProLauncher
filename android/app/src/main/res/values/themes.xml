@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Uygulama tamamen Compose ile çizilir; XML tema yalnızca pencere arka planı,
+        durum/navigasyon çubuğu davranışı ve açılış teması için kullanılır.
+    -->
+    <style name="Theme.VexLauncher" parent="@android:style/Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/vex_background</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowActivityTransitions">true</item>
+    </style>
+</resources>
